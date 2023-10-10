@@ -1,23 +1,25 @@
  <h1>Post List</h1>
+ <%= link_to 'New', new_post_path %>
 
  <table>
      <thead>
      <td>title</td>
      <td>content</td>
      <td>address</td>
+     <td>Category</td>
+     <td>Actions</td>
    </thead>
      <% @posts.each do |post| %>
          <tr>
          <td><%= post.title %></td>
          <td><%= post.content %></td>
          <td><%= post.address %></td>
-         <td></td>
+         <td><%= post.categories.pluck(:name).join(',') %></td>
            <td>
              <%= link_to 'Show', post_path(post) %>
              <%= link_to 'Edit', edit_post_path(post) %>
              <%= link_to 'Comments', post_comments_path(post) %>
              <%= link_to 'New Comment', new_post_comment_path(post) %>
-             <%= link_to 'New', new_post_path %>
              <%= button_to 'Delete', post_path(post), method: :delete %>
            </td>
        </tr>

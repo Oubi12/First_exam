@@ -1,3 +1,16 @@
+<div class="container">
+  <% if post.errors.any? %>
+    <div class="alert alert-warning" role="alert">
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<div class="container">
 <%= form_with model: post do |form| %>
   <% if post.errors.any? %>
     <ul>
@@ -18,5 +31,9 @@
     <%= form.label :address %>
     <%= form.text_field :address %>
   </div>
-  <%= form.submit %>
+  <div>
+    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+  </div>
+  <%= form.submit class: 'btn btn-primary'%>
 <% end %>
+</div>
