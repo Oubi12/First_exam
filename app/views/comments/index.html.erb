@@ -2,12 +2,19 @@
 <h2>Comments</h2>
 <ul>
   <% @comments.each do |comment| %>
-    <li><%= comment.content %>(<%= comment.created_at.strftime("Commented on %m/%d/%Y at %I:%M%p") %>)</li>
-    <li><%= link_to 'Edit', edit_post_comment_path(@post, comment), class: 'btn btn-primary' %></li>
-    <li><%= button_to 'Delete', post_comment_path(@post, comment), class: 'btn btn-danger' %></li>
+    <li>
+      <%= comment.content %>(By: <%= "#{comment.user&.email} #{comment.created_at.strftime("Commented on %m/%d/%Y at %I:%M%p")}" %>)
+      <% if user_signed_in? && comment.user == current_user %>
+        <%= link_to 'Edit Comment', edit_post_comment_path(@post, comment), class: "btn btn-sm btn-warning" %>
+        <%= button_to 'Delete', post_comment_path(@post, comment), method: :delete, class: "btn btn-sm btn-danger" %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 
 <%= link_to 'Back', posts_path, class: 'btn btn-outline-dark'%>
 <%= link_to 'New Comment', new_post_comment_path(@post), class: 'btn btn-dark' %>
+
+
+
 <%#= button_to 'Delete', post_comment_path(@post, comment), method: :delete %>

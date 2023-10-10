@@ -1,29 +1,32 @@
- <h1>Post List</h1>
- <%= link_to 'New', new_post_path %>
+<h1>Post List</h1>
+<%= link_to 'New', new_post_path, class: 'btn btn-success btn-sm' %>
 
- <table>
-     <thead>
-     <td>title</td>
-     <td>content</td>
-     <td>address</td>
-     <td>Category</td>
-     <td>Actions</td>
-   </thead>
-     <% @posts.each do |post| %>
-         <tr>
-         <td><%= post.title %></td>
-         <td><%= post.content %></td>
-         <td><%= post.address %></td>
-         <td><%= post.categories.pluck(:name).join(',') %></td>
-           <td>
-             <%= link_to 'Show', post_path(post) %>
-             <%= link_to 'Edit', edit_post_path(post) %>
-             <%= link_to 'Comments', post_comments_path(post) %>
-             <%= link_to 'New Comment', new_post_comment_path(post) %>
-             <%= button_to 'Delete', post_path(post), method: :delete %>
-           </td>
-       </tr>
-
-   <% end %>
-   </table>
+<table>
+  <thead>
+  <td>title</td>
+  <td>content</td>
+  <td>address</td>
+  <td>Category</td>
+  <td>user</td>
+  <td>Actions</td>
+  </thead>
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.content %></td>
+      <td><%= post.address %></td>
+      <td><%= post.categories.pluck(:name).join(',') %></td>
+      <td><%= post.user&.email %></td>
+      <td>
+        <%= link_to 'Show', post_path(post) %>
+        <%= link_to 'Comments', post_comments_path(post) %>
+        <%= link_to 'New Comment', new_post_comment_path(post) %>
+        <% if user_signed_in? && post.user == current_user %>
+          <%= link_to 'Edit', edit_post_path(post) %>
+          <%= button_to 'Delete', post_path(post), method: :delete %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+</table>
 
