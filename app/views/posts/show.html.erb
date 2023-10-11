@@ -5,6 +5,14 @@
   <li><%= @post.address %></li>
   <li>Created BY: <%= @post.user&.email %></li>
 </ul>
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', posts_path, class: 'btn btn-dark' %>
 <%= link_to 'New Comment', new_post_comment_path(@post), class: 'btn btn-dark' %>
 <%= link_to 'Edit', edit_post_path, class: 'btn btn-dark' %>
+<hr>
+<h2>Comments </h2>
+<ul>
+<% @post.comments.each do|comment| %>
+     <%= "#{comment.user&.email}"%> "<%= comment.content %>"
+     <%="#{comment.created_at.strftime("Commented on %m/%d/%Y at %I:%M%p")}" %>
+<% end %>
+</ul>

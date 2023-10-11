@@ -11,6 +11,35 @@
   </head>
 
   <body>
+  <nav class="navbar navbar-expand-lg navbar-light" bg-light style="background-color: #e3f2fd;">
+
+    <div class="container-fluid">
+      <%= link_to "KODACAMP", root_path, class: "navbar-brand" %>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav e-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%= link_to 'My Posts', posts_path, class: "nav-link #{'active' if
+              controller_name == 'posts' && action_name == 'index'}", 'aria-current': 'page' %>
+          </li>
+          <% if user_signed_in? %>
+            <%= button_to 'Sign out', destroy_user_session_path,
+                          style: "color: red;", method: :delete,
+                          data: { confirm: 'Are you sure you want to logout' } %>
+          <% else %>
+            <%= link_to 'Sign in', new_user_session_path, class: 'nav-link', style: "color: green;" %>
+          <% end %>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
   <div class="container">
     <% if flash[:notice] %>
       <div class="alert alert-success" role="alert">
