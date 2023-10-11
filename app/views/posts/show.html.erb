@@ -5,7 +5,6 @@
   <li><%= @post.address %></li>
   <li>Created BY: <%= @post.user&.email %></li>
 </ul>
-<%= link_to 'Back', posts_path, class: 'btn btn-dark' %>
 <%= link_to 'New Comment', new_post_comment_path(@post), class: 'btn btn-dark' %>
 <%= link_to 'Edit', edit_post_path, class: 'btn btn-dark' %>
 <hr>
@@ -16,3 +15,5 @@
      <%="#{comment.created_at.strftime("Commented on %m/%d/%Y at %I:%M%p")}" %>
 <% end %>
 </ul>
+<br>
+<%= link_to 'GO BACK', session[:previous_url] || user_posts_path %>

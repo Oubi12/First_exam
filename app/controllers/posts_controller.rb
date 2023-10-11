@@ -24,7 +24,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def show; end
+  def show;
+    session[:previous_url] = request.referer
+  end
 
   def edit; end
 
@@ -52,7 +54,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :address, category_ids: [])
+    params.require(:post).permit(:title, :content, :address,:image, category_ids: [])
   end
 
   def validate_post_owner
