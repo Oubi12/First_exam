@@ -1,9 +1,13 @@
-<h1>Post List</h1>
+
+<h1>Hello <%= current_user.email if user_signed_in? %></h1>
+<h2>Post List</h2>
 <%= link_to 'New', new_post_path, class: 'btn btn-success btn-sm' %>
 <table>
   <thead>
+  <td>comments count</td>
   <td>title</td>
   <td>content</td>
+  <td>image</td>
   <td>address</td>
   <td>Category</td>
   <td>user</td>
@@ -11,8 +15,10 @@
   </thead>
   <% @posts.each do |post| %>
     <tr>
+      <td><%= post.comments_count %></td>
       <td><%= post.title %></td>
       <td><%= post.content %></td>
+      <td><%= image_tag post.image.url, class: "post-image" if post.image.present? %></td>
       <td><%= post.address %></td>
       <td><%= post.categories.pluck(:name).join(',') %></td>
       <td><%= post.user&.email %></td>
@@ -29,4 +35,6 @@
     <% end %>
 </table>
 <%= paginate @posts %>
+
+
 
