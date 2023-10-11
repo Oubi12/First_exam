@@ -34,6 +34,9 @@
   <div>
     <%= form.collection_check_boxes :category_ids, Category.all, :id, :name, class: 'form-control' %>
   </div>
+    <div>
+      <%= form.file_field :image%>
+    </div>
   <%= form.submit class: 'btn btn-primary'%>
 <% end %>
 </div>
