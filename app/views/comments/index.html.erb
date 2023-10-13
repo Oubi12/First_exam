@@ -13,4 +13,6 @@
 </ul>
 <%= link_to 'Back', posts_path, class: 'btn btn-outline-dark'%>
 <%= link_to 'New Comment', new_post_comment_path(@post), class: 'btn btn-dark' %>
+
 <%= paginate @comments %>
+

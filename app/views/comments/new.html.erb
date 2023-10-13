@@ -1,1 +1,1 @@
-<%= render partial: 'form', locals: { post: @post, comment: @comment, path: post_comments_path(@post) } %>
+<%= render partial: 'form', locals: { comment: @comment, path: post_comments_path(@post), method: :post } %>
