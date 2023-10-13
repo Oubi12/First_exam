@@ -36,10 +36,15 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
+    if @comment.destroy
     flash[:notice] = 'Comment deleted successfully'
     redirect_to post_comments_path(@post)
+    else
+      flash[:alert] = 'Failed'
+      redirect_to post_comments_path(@post)
+    end
   end
+
 
   private
 
